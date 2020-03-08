@@ -2,12 +2,18 @@ from codecs     import open
 from inspect    import getsource
 from os.path    import abspath, dirname, join
 from setuptools import setup
+import sys
 
 here = abspath(dirname(getsource(lambda:0)))
 
 with open(join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+if sys.platform == "linux":
+    install_requires = ["PyGObject"]
+else:
+    install_requires = []
+    
 setup(name             = 'playsound',
       version          = '1.2.1',
       description      = long_description.splitlines()[2][1:-1],
@@ -16,6 +22,7 @@ setup(name             = 'playsound',
       author           = 'Taylor Marks',
       author_email     = 'taylor@marksfam.com',
       license          = 'MIT',
+      install_requires = install_requires,
       classifiers      = ['Development Status :: 5 - Production/Stable',
                           'Intended Audience :: Developers',
                           'License :: OSI Approved :: MIT License',
