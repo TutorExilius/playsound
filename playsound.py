@@ -108,14 +108,15 @@ def _playsoundNix(sound, block=True):
     else:
         bus.add_signal_watch()
 
-        def on_message(self, bus, message):
-            t = message.type
-            if t == Gst.MessageType.EOS:
-                playbin.set_state(Gst.State.NULL)
-            elif t == Gst.MessageType.ERROR:
-                playbin.set_state(Gst.State.NULL)
-                err, debug = message.parse_error()
-                print ("Error: %s" % err, debug)
+        def on_message(self, bus, message=None):
+            if message:
+                t = message.type
+                if t == Gst.MessageType.EOS:
+                    playbin.set_state(Gst.State.NULL)
+                elif t == Gst.MessageType.ERROR:
+                    playbin.set_state(Gst.State.NULL)
+                    err, debug = message.parse_error()
+                    print ("Error: %s" % err, debug)
 
         bus.connect("message", on_message)
 
