@@ -121,6 +121,9 @@ def _playsoundNix(sound, block=True):
         bus.connect("message", on_message)
 
 
+"""
+
+add this to main
 from platform import system
 system = system()
 
@@ -131,4 +134,6 @@ elif system == 'Darwin':
 else:
     playsound = _playsoundNix
 
-del system
+# del system
+
+"""
